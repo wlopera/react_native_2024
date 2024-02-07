@@ -36,3 +36,189 @@
 * limpiar cache: > npm cache clean --force
 * levantar para simuladorfes y celulares: > npm start --tunnel
 * levantar APP para simuladores: npm start -- --reset-cache
+
+#### Codigos resaltanes:
+
+App.js
+```
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
+
+import { drawerScreenList } from "./components/utils/DrawerScreenList";
+import Colors from "./constants/Colors";
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="Main"
+          screenOptions={{
+            headerTintColor: "white",
+            drawerActiveBackgroundColor: "#f0e1ff",
+            drawerActiveTintColor: "#3c0a6b",
+            headerStyle: { backgroundColor: "#3c0a6b" },
+          }}
+        >
+          {drawerScreenList.map((item, index) => (
+            <Drawer.Screen
+              key={item.id}
+              name={item.name}
+              component={item.component}
+              options={{
+                drawerLabel: item.label,
+                drawerIcon: ({ color, size }) => (
+                  <Ionicons name={item.iconName} color={color} size={size} />
+                ),
+              }}
+            />
+          ))}
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.primary500,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+```
+
+DrawerScreenList.js: Lista de Valores de navegación
+```
+import Main from "../screens/Main";
+import ListExample from "../screens/ListExample";
+import TextInputExample from "../screens/TextInputExample";
+import ScrollViewExample from "../screens/ScrollViewExample";
+import ImageExample from "../screens/ImageExample";
+import PickerExample from "../screens/PickerExample";
+
+export const drawerScreenList = [
+  {
+    id: 1,
+    name: "Principal",
+    component: Main,
+    label: "Principal",
+    iconName: "home",
+  },
+  {
+    id: 2,
+    name: "Listado",
+    component: ListExample,
+    label: "Lista",
+    iconName: "list-outline",
+  },
+  {
+    id: 3,
+    name: "Entrada de Textos",
+    component: TextInputExample,
+    label: "Textos",
+    iconName: "document-text-outline",
+  },
+  {
+    id: 4,
+    name: "Desplazar Listado",
+    component: ScrollViewExample,
+    label: "Mover Vertical",
+    iconName: "receipt-outline",
+  },
+  {
+    id: 5,
+    name: "Imagen",
+    component: ImageExample,
+    label: "Imagen",
+    iconName: "image-outline",
+  },
+  {
+    id: 6,
+    name: "Picker",
+    component: PickerExample,
+    label: "Picker",
+    iconName: "film-outline",
+  },
+];
+```
+ImageExample.js: Manejo de Imagen y estilos (a manera de ejemplo)
+```
+import { Image, StyleSheet, Text, View } from "react-native";
+
+const ImageExample = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={require("../../assets/images/image.png")}
+          style={styles.imageHeader}
+        />
+        <Text style={styles.textHeader}>Montaña Lunar</Text>
+      </View>
+      <View style={styles.imageView}>
+        <Image
+          source={require("../../assets/images/mountain.png")}
+          style={styles.image}
+        />
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.textFooter}>wlopera @2024</Text>
+      </View>
+    </View>
+  );
+};
+
+export default ImageExample;
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    flexDirection: "column",
+    justifyContent:"space-between"
+  },
+  header: {
+    alignItems: "center",
+    backgroundColor: "red",
+    flexDirection: "row",
+  },
+  imageHeader: {
+    margin: 5,
+    width: 50,
+    height: 50,
+    borderRadius: 8,
+  },
+  textHeader: {
+    fontSize: 24,
+    textAlign: "center",
+    paddingLeft: 20
+  },
+  imageView: {
+    borderWidth: 1,
+    borderColor: "black",
+    marginLeft: 16,
+    marginRight: 15,
+    marginTop:60,
+    marginBottom:120
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  footer: {
+    justifyContent: "center",
+    backgroundColor: "#14ea7f",
+  },
+  textFooter: {
+    fontSize: 20,
+    textAlign: "center",
+  },
+});
+```
