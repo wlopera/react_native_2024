@@ -23,3 +23,16 @@
 ![image](https://github.com/wlopera/react_native_2024/assets/7141537/53374467-ccc7-4998-8b87-db6c0c28f4ef)
 
 ![image](https://github.com/wlopera/react_native_2024/assets/7141537/8c72b39c-0c75-42b2-b201-892c57f5d070)
+
+### LEVANTAR APP
+* > npm cache clean --force
+* > npm cache verify
+* > npm -g uninstall expo-cli --save
+* > npm install expo-cli --global
+* > expo init guess-game
+* > cd app-name
+* > npm start
+
+* limpiar cache: > npm cache clean --force
+* levantar para simuladorfes y celulares: > npm start --tunnel
+* levantar APP para simuladores: npm start -- --reset-cache
