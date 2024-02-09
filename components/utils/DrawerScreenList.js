@@ -4,6 +4,7 @@ import TextInputExample from "../screens/TextInputExample";
 import ScrollViewExample from "../screens/ScrollViewExample";
 import ImageExample from "../screens/ImageExample";
 import PickerExample from "../screens/PickerExample";
+import CleanerScreen from "../screens/CleanerScreen";
 
 export const drawerScreenList = [
   {
@@ -46,6 +47,13 @@ export const drawerScreenList = [
     name: "Picker",
     component: PickerExample,
     label: "Picker",
+    iconName: "film-outline",
+  },
+  {
+    id: 7,
+    name: "Limpiador",
+    component: CleanerScreen,
+    label: "Limpiador",
     iconName: "film-outline",
   },
 ];

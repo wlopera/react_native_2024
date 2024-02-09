@@ -98,3 +98,20 @@ export const players = [
 export const getPlayerInit = () => {
   return Math.floor(Math.random() * players.length);
 };
+
+export const getRandomDecimal = (min, max) => {
+  return Math.random() * max + min;
+};
+
+export const getRandomMinMax = (min, max) => {
+  return Math.floor(Math.random() * max) + min;
+};
+
+export const sleepTime = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const step = getRandomMinMax(0,3)
+      resolve(step === 0 ? "0.00" : getRandomDecimal(0, 10000).toFixed(2));
+    }, Math.round(getRandomMinMax(1000, 5000)));
+  });
+};

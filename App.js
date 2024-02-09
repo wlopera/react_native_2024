@@ -1,44 +1,46 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 
 import { drawerScreenList } from "./components/utils/DrawerScreenList";
-
 import Colors from "./constants/Colors";
 
-const ButtonTabs = createBottomTabNavigator();
+import CleanerContextProvider from "./store/cleaner-context";
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <ButtonTabs.Navigator
-          initialRouteName="Main"
-          screenOptions={{
-            headerTintColor: "white",
-            drawerActiveBackgroundColor: "#f0e1ff",
-            drawerActiveTintColor: "#3c0a6b",
-            headerStyle: { backgroundColor: "#3c0a6b" },
-          }}
-        >
-          {drawerScreenList.map((item, index) => (
-            <ButtonTabs.Screen
-              key={item.id}
-              name={item.name}
-              component={item.component}
-              options={{
-                tabBarLabel: item.label,
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name={item.iconName} color={color} size={size} />
-                ),
-              }}
-            />
-          ))}
-        </ButtonTabs.Navigator>
-      </NavigationContainer>
+      <CleanerContextProvider>
+        <NavigationContainer>
+          <Drawer.Navigator
+            initialRouteName="Main"
+            screenOptions={{
+              headerTintColor: "white",
+              drawerActiveBackgroundColor: "#f0e1ff",
+              drawerActiveTintColor: "#3c0a6b",
+              headerStyle: { backgroundColor: "#3c0a6b" },
+            }}
+          >
+            {drawerScreenList.map((item, index) => (
+              <Drawer.Screen
+                key={item.id}
+                name={item.name}
+                component={item.component}
+                options={{
+                  drawerLabel: item.label,
+                  drawerIcon: ({ color, size }) => (
+                    <Ionicons name={item.iconName} color={color} size={size} />
+                  ),
+                }}
+              />
+            ))}
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </CleanerContextProvider>
     </>
   );
 }
